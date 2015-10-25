@@ -1,0 +1,258 @@
+################################################################################
+#Definciones
+
+DIR_CLASES_APP=./class/app/
+DIR_CLASES_INTERFACES=./class/app/interfaces/
+DIR_CLASES_JUEGO=./class/app/juego/
+DIR_GRAFICOS=$(DIR_CLASES_APP)graficos/
+DIR_DEFINICIONES=$(DIR_CLASES_APP)definiciones/
+DIR_NIVELES=$(DIR_CLASES_APP)niveles/
+DIR_COLISIONES=$(DIR_CLASES_APP)colisiones/
+
+################################################################################
+#Clases...
+
+$(DIR_O)recogedor_input.o:\
+$(DIR_O)input_usuario.o\
+$(DIR_CLASES_APP)input/recogedor_input.h \
+$(DIR_CLASES_APP)input/recogedor_input.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)input/recogedor_input.cpp -o $(DIR_O)recogedor_input.o 
+
+$(DIR_O)input_usuario.o:\
+$(DIR_CLASES_APP)input/input_usuario.h \
+$(DIR_CLASES_APP)input/input_usuario.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)input/input_usuario.cpp -o $(DIR_O)input_usuario.o 
+
+################################################################################
+#Juego...
+
+$(DIR_O)jugador.o:\
+$(DIR_O)actor_movil.o\
+$(DIR_O)representable.o\
+$(DIR_O)input_usuario.o\
+$(DIR_CLASES_JUEGO)jugador.h \
+$(DIR_CLASES_JUEGO)jugador.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)jugador.cpp -o $(DIR_O)jugador.o
+
+$(DIR_O)proyectil.o:\
+$(DIR_O)actor_movil.o\
+$(DIR_O)representable.o\
+$(DIR_CLASES_JUEGO)proyectil.h \
+$(DIR_CLASES_JUEGO)proyectil.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)proyectil.cpp -o $(DIR_O)proyectil.o
+
+$(DIR_O)humo.o:\
+$(DIR_O)actor_movil.o\
+$(DIR_O)representable.o\
+$(DIR_CLASES_JUEGO)humo.h \
+$(DIR_CLASES_JUEGO)humo.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)humo.cpp -o $(DIR_O)humo.o
+
+$(DIR_O)proyectil_enemigo.o:\
+$(DIR_O)actor_movil.o\
+$(DIR_O)representable.o\
+$(DIR_CLASES_JUEGO)proyectil_enemigo.h \
+$(DIR_CLASES_JUEGO)proyectil_enemigo.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)proyectil_enemigo.cpp -o $(DIR_O)proyectil_enemigo.o
+
+$(DIR_O)enemigo_patrulla.o:\
+$(DIR_O)actor_movil.o\
+$(DIR_O)representable.o\
+$(DIR_O)disparable.o\
+$(DIR_O)con_turno.o\
+$(DIR_CLASES_JUEGO)enemigo_patrulla.h \
+$(DIR_CLASES_JUEGO)enemigo_patrulla.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)enemigo_patrulla.cpp -o $(DIR_O)enemigo_patrulla.o
+
+$(DIR_O)enemigo_disparador.o:\
+$(DIR_O)actor.o\
+$(DIR_O)representable.o\
+$(DIR_O)disparable.o\
+$(DIR_O)con_turno.o\
+$(DIR_CLASES_JUEGO)enemigo_disparador.h \
+$(DIR_CLASES_JUEGO)enemigo_disparador.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)enemigo_disparador.cpp -o $(DIR_O)enemigo_disparador.o
+
+$(DIR_O)enemigo_canon.o:\
+$(DIR_O)actor.o\
+$(DIR_O)con_turno.o\
+$(DIR_CLASES_JUEGO)enemigo_canon.h \
+$(DIR_CLASES_JUEGO)enemigo_canon.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)enemigo_canon.cpp -o $(DIR_O)enemigo_canon.o
+
+$(DIR_O)rompible.o:\
+$(DIR_O)actor.o\
+$(DIR_O)representable.o\
+$(DIR_O)disparable.o\
+$(DIR_CLASES_JUEGO)rompible.h \
+$(DIR_CLASES_JUEGO)rompible.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)rompible.cpp -o $(DIR_O)rompible.o
+
+$(DIR_O)plataforma.o:\
+$(DIR_O)actor.o\
+$(DIR_O)representable.o\
+$(DIR_O)con_turno.o\
+$(DIR_CLASES_JUEGO)plataforma.h \
+$(DIR_CLASES_JUEGO)plataforma.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)plataforma.cpp -o $(DIR_O)plataforma.o
+
+$(DIR_O)bonus.o:\
+$(DIR_O)actor.o\
+$(DIR_O)representable.o\
+$(DIR_CLASES_JUEGO)bonus.h \
+$(DIR_CLASES_JUEGO)bonus.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)bonus.cpp -o $(DIR_O)bonus.o
+
+$(DIR_O)entrada.o:\
+$(DIR_O)actor.o\
+$(DIR_CLASES_JUEGO)entrada.h \
+$(DIR_CLASES_JUEGO)entrada.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)entrada.cpp -o $(DIR_O)entrada.o
+
+$(DIR_O)salida.o:\
+$(DIR_O)actor.o\
+$(DIR_CLASES_JUEGO)salida.h \
+$(DIR_CLASES_JUEGO)salida.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)salida.cpp -o $(DIR_O)salida.o
+
+$(DIR_O)actor.o:\
+$(DIR_O)espaciable.o\
+$(DIR_CLASES_JUEGO)actor.h \
+$(DIR_CLASES_JUEGO)actor.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)actor.cpp -o $(DIR_O)actor.o 
+
+$(DIR_O)actor_movil.o:\
+$(DIR_O)actor.o\
+$(DIR_CLASES_JUEGO)actor_movil.h \
+$(DIR_CLASES_JUEGO)actor_movil.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_JUEGO)actor_movil.cpp -o $(DIR_O)actor_movil.o 
+
+################################################################################
+#Graficos
+
+$(DIR_O)bloque_transformacion_representable.o :\
+$(DIR_O)animaciones.o \
+$(DIR_GRAFICOS)bloque_transformacion_representable.h \
+$(DIR_GRAFICOS)bloque_transformacion_representable.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_GRAFICOS)bloque_transformacion_representable.cpp -o $(DIR_O)bloque_transformacion_representable.o
+
+$(DIR_O)representador.o :\
+$(DIR_O)representable.o \
+$(DIR_GRAFICOS)representador.h \
+$(DIR_GRAFICOS)representador.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_GRAFICOS)representador.cpp -o $(DIR_O)representador.o
+
+$(DIR_O)animaciones.o :\
+$(DIR_GRAFICOS)animaciones.h \
+$(DIR_GRAFICOS)animaciones.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_GRAFICOS)animaciones.cpp -o $(DIR_O)animaciones.o
+
+#$(DIR_O)barra_indicadora.o :\
+#$(DIR_GRAFICOS)barra_indicadora.h \
+#$(DIR_GRAFICOS)barra_indicadora.cpp
+#	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_GRAFICOS)barra_indicadora.cpp -o $(DIR_O)barra_indicadora.o
+
+################################################################################
+#Interfaces...
+
+$(DIR_O)espaciable.o:\
+$(DIR_CLASES_INTERFACES)espaciable.h \
+$(DIR_CLASES_INTERFACES)espaciable.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_INTERFACES)espaciable.cpp -o $(DIR_O)espaciable.o 
+
+$(DIR_O)movil.o:\
+$(DIR_CLASES_INTERFACES)movil.h \
+$(DIR_CLASES_INTERFACES)movil.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_INTERFACES)movil.cpp -o $(DIR_O)movil.o
+
+$(DIR_O)representable.o:\
+$(DIR_CLASES_INTERFACES)representable.h \
+$(DIR_CLASES_INTERFACES)representable.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_INTERFACES)representable.cpp -o $(DIR_O)representable.o
+
+$(DIR_O)disparable.o:\
+$(DIR_CLASES_INTERFACES)disparable.h \
+$(DIR_CLASES_INTERFACES)disparable.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_INTERFACES)disparable.cpp -o $(DIR_O)disparable.o
+
+$(DIR_O)con_turno.o:\
+$(DIR_CLASES_INTERFACES)con_turno.h \
+$(DIR_CLASES_INTERFACES)con_turno.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_INTERFACES)con_turno.cpp -o $(DIR_O)con_turno.o
+
+$(DIR_O)objeto_juego.o:\
+$(DIR_CLASES_INTERFACES)objeto_juego.h \
+$(DIR_CLASES_INTERFACES)objeto_juego.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_INTERFACES)objeto_juego.cpp -o $(DIR_O)objeto_juego.o    
+
+################################################################################
+#Definiciones
+
+$(DIR_O)definiciones.o:\
+$(DIR_DEFINICIONES)definiciones.h \
+$(DIR_DEFINICIONES)definiciones.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_DEFINICIONES)definiciones.cpp -o $(DIR_O)definiciones.o
+
+################################################################################
+#Niveles
+
+$(DIR_O)parser_salas.o:\
+$(DIR_O)sala.o\
+#$(DIR_O)factoria_objetos_juego.o\
+$(DIR_O)definiciones.o\
+$(DIR_GENERADOR)parser_salas.h\
+$(DIR_GENERADOR)parser_salas.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_NIVELES)parser_salas.cpp -o $(DIR_O)parser_salas.o
+
+$(DIR_O)sala.o:\
+$(DIR_O)celda.o \
+$(DIR_O)entrada.o \
+$(DIR_O)salida.o \
+$(DIR_O)enemigo_patrulla.o \
+$(DIR_O)enemigo_canon.o \
+$(DIR_O)enemigo_disparador.o \
+$(DIR_O)celda_decorativa.o \
+#$(DIR_O)entrada.o \
+$(DIR_O)definiciones.o \
+#$(DIR_O)contenedor_objetos.o \
+$(DIR_NIVELES)sala.h \
+$(DIR_NIVELES)sala.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_NIVELES)sala.cpp -o $(DIR_O)sala.o
+
+$(DIR_O)celda_base.o:\
+$(DIR_O)definiciones.o \
+$(DIR_NIVELES)celda_base.h \
+$(DIR_NIVELES)celda_base.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_NIVELES)celda_base.cpp -o $(DIR_O)celda_base.o
+
+$(DIR_O)celda.o:\
+$(DIR_O)celda_base.o\
+$(DIR_O)espaciable.o\
+$(DIR_O)definiciones.o\
+$(DIR_NIVELES)celda.h\
+$(DIR_NIVELES)celda.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_NIVELES)celda.cpp -o $(DIR_O)celda.o
+
+$(DIR_O)celda_decorativa.o:\
+$(DIR_O)celda_base.o\
+$(DIR_O)representable.o\
+$(DIR_O)definiciones.o \
+$(DIR_NIVELES)celda_decorativa.h \
+$(DIR_NIVELES)celda_decorativa.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_NIVELES)celda_decorativa.cpp -o $(DIR_O)celda_decorativa.o
+
+################################################################################
+#Colisiones
+
+$(DIR_O)calculador_colisiones.o:\
+$(DIR_O)actor_movil.o\
+$(DIR_O)sala.o\
+$(DIR_COLISIONES)calculador_colisiones.h \
+$(DIR_COLISIONES)calculador_colisiones.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_COLISIONES)calculador_colisiones.cpp -o $(DIR_O)calculador_colisiones.o
+
+$(DIR_O)ajustador.o:\
+$(DIR_O)actor_movil.o\
+$(DIR_COLISIONES)ajustador.h \
+$(DIR_COLISIONES)ajustador.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_COLISIONES)ajustador.cpp -o $(DIR_O)ajustador.o

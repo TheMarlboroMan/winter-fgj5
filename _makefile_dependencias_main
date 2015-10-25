@@ -1,0 +1,56 @@
+DEP_HERRAMIENTAS_PROYECTO=$(DIR_O_HERRAMIENTAS_PROYECTO)tabla_sprites.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)tabla_animaciones.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)generador_numeros.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)selector_aleatorio.o \
+
+DEP_CLASES_APP=$(DIR_O)input_usuario.o\
+$(DIR_O)recogedor_input.o\
+$(DIR_O)actor.o\
+$(DIR_O)actor_movil.o\
+$(DIR_O)espaciable.o\
+$(DIR_O)representable.o\
+$(DIR_O)disparable.o\
+$(DIR_O)con_turno.o\
+$(DIR_O)objeto_juego.o\
+$(DIR_O)representador.o\
+$(DIR_O)movil.o\
+$(DIR_O)animaciones.o\
+$(DIR_O)jugador.o\
+$(DIR_O)rompible.o\
+$(DIR_O)plataforma.o\
+$(DIR_O)bonus.o\
+$(DIR_O)humo.o\
+$(DIR_O)proyectil.o\
+$(DIR_O)proyectil_enemigo.o\
+$(DIR_O)enemigo_patrulla.o\
+$(DIR_O)enemigo_disparador.o\
+$(DIR_O)enemigo_canon.o\
+$(DIR_O)bloque_transformacion_representable.o\
+$(DIR_O)definiciones.o\
+$(DIR_O)sala.o\
+$(DIR_O)entrada.o\
+$(DIR_O)salida.o\
+$(DIR_O)celda_base.o\
+$(DIR_O)celda.o\
+$(DIR_O)celda_decorativa.o\
+$(DIR_O)parser_salas.o\
+$(DIR_O)calculador_colisiones.o\
+$(DIR_O)ajustador.o\
+
+DEP_CONTROLADORES=$(DIR_O)controlador_base.o \
+$(DIR_O)controlador_juego.o \
+$(DIR_O)controlador_intro.o \
+$(DIR_O)controlador_game_over.o \
+
+DEP_FRAMEWORK_BASE=$(DIR_O)input_base.o \
+$(DIR_O)configuracion_base.o \
+$(DIR_O)audio_base.o \
+$(DIR_O)cargador_recursos_base.o \
+$(DIR_O)kernel_base.o \
+
+DEP_FRAMEWORK_DERIVADA=$(DIR_O)input.o \
+$(DIR_O)configuracion.o \
+$(DIR_O)localizador.o \
+$(DIR_O)audio.o \
+$(DIR_O)cargador_recursos.o \
+$(DIR_O)kernel.o \

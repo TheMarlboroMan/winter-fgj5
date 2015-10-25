@@ -1,0 +1,11 @@
+#indice ruta
+
+#Sonidos motor... estos no debemos cambiarlos porque se usan en código!
+1	data/sonidos/destruir.ogg
+2	data/sonidos/disparo.ogg
+3	data/sonidos/item.ogg
+4	data/sonidos/nivel_finalizado.ogg
+5	data/sonidos/salto.ogg
+6	data/sonidos/perder_vida.ogg
+
+#Sonidos de aplicacion...
