@@ -119,13 +119,17 @@ bool Kernel_base::loop(Interface_controlador& IC)
 
 	IC.dibujar(pantalla);
 
-	if(mostrar_fps)
+if(mostrar_fps)
 	{
+#ifdef WINCOMPIL
+		std::string fps="FPS:"+parche_mingw::to_string(controlador_fps.acc_frames_contados())+"\n"+IC.acc_debug();
+#else
 		std::string fps="FPS:"+std::to_string(controlador_fps.acc_frames_contados())+"\n"+IC.acc_debug();
+#endif
 		DLibV::Representacion_texto_auto_estatica txt(DLibV::Gestor_superficies::obtener(acc_recurso_fps()), fps);
 		txt.establecer_posicion(pantalla.acc_w()-128, 6);
 		txt.volcar(pantalla);
-	}	
+	}		
 
 	pantalla.actualizar();
 
