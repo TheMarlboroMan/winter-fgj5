@@ -1,17 +1,16 @@
 #Definiciones.
 
-#OPTIMIZACION=-O3
-SIMBOLOS_DEBUG=-g
+OPTIMIZACION=-O3
+#SIMBOLOS_DEBUG=-g
 FLAGS_BASE=-Wno-deprecated -Wall -ansi -pedantic -std=c++11
 
 CFLAGS=-c $(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CFLAGS_TARGET_FINAL=$(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CC=g++
-EJECUTABLE=a.out
-LIMPIAR=rm objects/*; rm libdan2/objects/*; rm libDanSDL2.a; rm $(EJECUTABLE);
-COMANDO_MOVER=mv libdan2/libDanSDL2.a libDanSDL2.a; 
+EJECUTABLE=winter.out
+LIMPIAR=rm -r objects/*; rm $(EJECUTABLE);
 
-DIR_HOME=/home/dani/programacion/c++/
+DIR_HOME=/home/daniel/Escritorio/winter_build/
 DIR_LIBDAN2=$(DIR_HOME)libdansdl2
 DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/class/
 DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/objects/
@@ -19,5 +18,6 @@ DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/objects/
 LINKER=-L$(DIR_LIBDAN2) -lDanSDL2 -L. -lSDL2 -lSDL2_mixer -lSDL2_image
 INCLUDES=-I $(DIR_LIBDAN2) -I $(DIR_HERRAMIENTAS_PROYECTO)
 LIBRERIAS=
+MKDIR=mkdir -p
 
 include makefile_comun

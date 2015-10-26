@@ -1,7 +1,7 @@
 #include "controlador_game_over.h"
 
-Controlador_game_over::Controlador_game_over(Director_estados& d, Localizador& loc)
-	:Controlador_base(d, loc),
+Controlador_game_over::Controlador_game_over(Director_estados& d, Localizador& loc, Configuracion_base& config)
+	:Controlador_base(d, loc, config),
 	rep_game_over(DLibV::Gestor_texturas::obtener(App::Recursos_graficos::rt_game_over)),
 	rep_the_end(DLibV::Gestor_texturas::obtener(App::Recursos_graficos::rt_the_end)),
 	tiempo(0.0f), alpha(0), alpha_the_end(0)

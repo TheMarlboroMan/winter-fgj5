@@ -4,13 +4,14 @@
 #include "../framework/interface_controlador.h"
 #include "director_estados.h"
 #include "../framework/derivada/localizador.h"
+#include "../framework/base/configuracion_base.h"
 
 class Controlador_base:public Interface_controlador
 {
 	public:
 
-	Controlador_base(Director_estados &d, Localizador& loc)
-		:DI(d), loc(loc), 
+	Controlador_base(Director_estados &d, Localizador& loc, Configuracion_base& config)
+		:DI(d), loc(loc), configuracion(config),
 		abandonar(false), romper(false)
 	{
 
@@ -28,11 +29,13 @@ class Controlador_base:public Interface_controlador
 	void 				romper_loop() {romper=true;}
 
 	std::string			texto_localizado(int indice) {return loc.obtener(indice);}
+	Configuracion_base& 		acc_configuracion() {return configuracion;}
 
 	private:
 
 	Director_estados& 		DI;
 	Localizador			loc;
+	Configuracion_base& 		configuracion;
 
 	bool 				abandonar;
 	bool 				romper;

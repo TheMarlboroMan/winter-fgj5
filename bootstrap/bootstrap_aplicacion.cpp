@@ -37,11 +37,13 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	App_Graficos::Animaciones animaciones;
 	animaciones.cargar();
 
+	auto& cfg=kernel.acc_configuracion();
+
 	//Controladores e interfaces.
 	Director_estados DI;
-	Controlador_juego C_J(DI, loc, salas, animaciones);
-	Controlador_intro C_I(DI, loc);
-	Controlador_game_over C_GO(DI, loc);
+	Controlador_juego C_J(DI, loc, cfg, salas, animaciones);
+	Controlador_intro C_I(DI, loc, cfg);
+	Controlador_game_over C_GO(DI, loc, cfg);
 	Interface_controlador * IC=&C_I;
 
 	//Loop principal.

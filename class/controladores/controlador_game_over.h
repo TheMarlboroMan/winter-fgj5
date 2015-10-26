@@ -10,7 +10,7 @@ class Controlador_game_over:public Controlador_base
 	///////////////
 	//Interface pública.
 	public:
-					Controlador_game_over(Director_estados& d, Localizador& loc);
+					Controlador_game_over(Director_estados& d, Localizador& loc, Configuracion_base& config);
 
 	virtual void 			preloop(Input_base& input, float delta);
 	virtual void 			postloop(Input_base& input, float delta);

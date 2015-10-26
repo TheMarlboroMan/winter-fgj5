@@ -25,7 +25,7 @@ class Controlador_juego:public Controlador_base
 	//Interface pública.
 	public:
 	
-					Controlador_juego(Director_estados& d, Localizador& loc, const std::vector<App_Niveles::Sala>& salas, App_Graficos::Animaciones& anim);
+					Controlador_juego(Director_estados& d, Localizador& loc, Configuracion_base& config, const std::vector<App_Niveles::Sala>& salas, App_Graficos::Animaciones& anim);
 
 	virtual void 			preloop(Input_base& input, float delta);
 	virtual void 			postloop(Input_base& input, float delta);

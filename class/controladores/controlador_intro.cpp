@@ -1,7 +1,7 @@
 #include "controlador_intro.h"
 
-Controlador_intro::Controlador_intro(Director_estados& d, Localizador& loc)
-	:Controlador_base(d, loc),
+Controlador_intro::Controlador_intro(Director_estados& d, Localizador& loc, Configuracion_base& config)
+	:Controlador_base(d, loc, config),
 	rep_fondo(DLibV::Gestor_texturas::obtener(App::Recursos_graficos::rt_intro))
 {
 	rep_fondo.establecer_posicion(0, 0, 800, 600);

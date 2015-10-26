@@ -31,6 +31,8 @@ struct Estado_dinamicas
 		con_bonus=true,
 		con_vidas=true,
 		colores_originales=true;
+	float	volumen_musica;
+	Estado_dinamicas(float v):volumen_musica(v) {}
 };
 
 struct Datos_juego

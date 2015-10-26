@@ -1,8 +1,9 @@
 #include "controlador_juego.h"
 
-Controlador_juego::Controlador_juego(Director_estados &DI, Localizador& loc, const std::vector<App_Niveles::Sala>& salas, App_Graficos::Animaciones& anim)
-	:Controlador_base(DI, loc),
+Controlador_juego::Controlador_juego(Director_estados &DI, Localizador& loc, Configuracion_base& config,const std::vector<App_Niveles::Sala>& salas, App_Graficos::Animaciones& anim)
+	:Controlador_base(DI, loc, config),
 	estado(estados::normal),
+	estado_dinamicas(config.acc_volumen_musica()),
 	camara(0, 0, App_Definiciones::definiciones::w_vista, App_Definiciones::definiciones::h_vista),
 	representador(anim),
 	jugador(200, 200),
@@ -16,13 +17,14 @@ Controlador_juego::Controlador_juego(Director_estados &DI, Localizador& loc, con
 void Controlador_juego::reiniciar_estado_inicial()
 {
 	//Reiniciar parámetros...
-	estado_dinamicas=App_Definiciones::Estado_dinamicas();
+	estado_dinamicas=App_Definiciones::Estado_dinamicas(acc_configuracion().acc_volumen_musica());
 	datos_juego=App_Definiciones::Datos_juego();
 	indice_sala=0;
 	siguiente_sala=0;
 	sala_finalizada=0;
 	
 	representador.resetar_animaciones();
+	Audio::establecer_volumen_musica(acc_configuracion().acc_volumen_musica());
 
 	//Reiniciar estado de salas...
 	estados_salas.clear();
@@ -147,7 +149,7 @@ void Controlador_juego::loop(Input_base& input, float delta)
 				{
 					case 1: procesar_animacion_caida_fondo(delta, input); break;
 					case 2: procesar_animacion_cambio_color(delta, input); break;
-					case 3: procesar_animacion_cambio_musica(delta, input); break;	
+					case 3: procesar_animacion_cambio_musica(delta, input); break;
 					default: break;
 				}
 			break;
@@ -220,18 +222,16 @@ void Controlador_juego::procesar_animacion_cambio_color(float delta, Input_base&
 
 void Controlador_juego::procesar_animacion_cambio_musica(float delta, Input_base& input)
 {
-	float vol=Audio::acc_volumen_musica();
-
-	if(!vol && input.hay_eventos_teclado_down())
+	if(!estado_dinamicas.volumen_musica && input.hay_eventos_teclado_down())
 	{
 		Audio::detener_musica();
 		estado=estados::normal;
 	}
 	else
 	{
-		vol-=delta * 15.0f;
-		if(vol < 0.f) vol=0.f;
-		Audio::establecer_volumen_musica(vol);
+		estado_dinamicas.volumen_musica-=delta * 20.f;
+		if(estado_dinamicas.volumen_musica < 0.f) estado_dinamicas.volumen_musica=0.f;
+		Audio::establecer_volumen_musica(estado_dinamicas.volumen_musica);
 	}
 }
 
@@ -587,7 +587,6 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 
 void Controlador_juego::perder_vida()
 {
-//TODO: Restaurar.
 	Audio::insertar_sonido(DLibA::Estructura_sonido((DLibA::Gestor_recursos_audio::obtener_sonido(App::Recursos_audio::rs_perder_vida))));
 	jugador.perder_vida();
 	estado=estados::animacion_muerte;
