@@ -1,17 +1,29 @@
 #Definiciones.
+
+OPTIMIZACION=-O3
+#SIMBOLOS_DEBUG=-g
+FLAGS_BASE=-Wno-deprecated -Wall -ansi -pedantic -std=c++11
 LINKARQUITECTURA=-lmingw32
-UNIDAD_DISCO=C
+UNIDAD_DISCO=K
 MINGW32_INCLUDE=/mingw_dev/include
 MINGW32_LIB=/mingw_dev/lib
 
-CFLAGS= -DWINCOMPIL=1 -c -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
-CFLAGS_TARGET_FINAL=-DWINCOMPIL=1 -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
+FLAGS_BASE= -DWINCOMPIL=1 -D__NO_INLINE__ -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
+
+CFLAGS=-c $(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
+CFLAGS_TARGET_FINAL=$(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CC=g++
-EJECUTABLE=familiar_temple.exe
-LIMPIAR=del objects\*; del libdan2\objects\*; del libDanSDL2.a; del $(EJECUTABLE);
-COMANDO_MOVER=move libdan2\libDanSDL2.a libDanSDL2.a; 
-NOMBRE_MAKE_MOTOR=makefile_win
-LINKER=-L. -lDanSDL2 $(LINKARQUITECTURA) -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -static-libgcc -static-libstdc++
-#-mwindows
+EJECUTABLE=winter.exe
+LIMPIAR=rm -r objects/*; rm $(EJECUTABLE);
+
+DIR_HOME=$(UNIDAD_DISCO):/winter_build/
+DIR_LIBDAN2=$(DIR_HOME)libdansdl2
+DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/class/
+DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/objects/
+
+LINKER=-L$(DIR_LIBDAN2) -lDanSDL2 -L. -lSDL2 -lSDL2_mixer -lSDL2_image
+INCLUDES=-I $(DIR_LIBDAN2) -I $(DIR_HERRAMIENTAS_PROYECTO)
+LIBRERIAS=
+MKDIR=mkdir -p
 
 include makefile_comun
