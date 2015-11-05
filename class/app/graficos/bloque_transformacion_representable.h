@@ -1,7 +1,8 @@
 #ifndef BLOQUE_TRANSFORMACION_REPRESENTABLE_H
 #define BLOQUE_TRANSFORMACION_REPRESENTABLE_H
 
-#include <libDan2.h>
+#include <def_video.h>
+#include <capa_compatibilidad_representaciones_libdansdl2.h>
 #include "animaciones.h"
 
 namespace App_Graficos

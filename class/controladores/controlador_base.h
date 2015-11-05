@@ -5,6 +5,7 @@
 #include "director_estados.h"
 #include "../framework/derivada/localizador.h"
 #include "../framework/base/configuracion_base.h"
+#include <capa_compatibilidad_representaciones_libdansdl2.h>
 
 class Controlador_base:public Interface_controlador
 {
