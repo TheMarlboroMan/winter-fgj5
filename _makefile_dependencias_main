@@ -2,6 +2,10 @@ DEP_HERRAMIENTAS_PROYECTO=$(DIR_O_HERRAMIENTAS_PROYECTO)tabla_sprites.o \
 $(DIR_O_HERRAMIENTAS_PROYECTO)tabla_animaciones.o \
 $(DIR_O_HERRAMIENTAS_PROYECTO)generador_numeros.o \
 $(DIR_O_HERRAMIENTAS_PROYECTO)selector_aleatorio.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)localizador_base.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)lector_txt.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)controlador_argumentos.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)string_utilidades.o \
 
 DEP_CLASES_APP=$(DIR_O)input_usuario.o\
 $(DIR_O)recogedor_input.o\

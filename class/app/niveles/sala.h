@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <matriz2d.h>
+#include <class/matriz2d.h>
 
 #include "celda.h"
 #include "celda_decorativa.h"

@@ -22,7 +22,7 @@ class Kernel_app:public Kernel_base
 
 	public:
 
-	Kernel_app(DLibH::Controlador_argumentos& CARG):Kernel_base(CARG) {}
+	Kernel_app(Herramientas_proyecto::Controlador_argumentos& CARG):Kernel_base(CARG) {}
 
 	virtual void inicializar() {Kernel_base::inicializar();}	//Si es necesario podemos personalizar varios aspectos aquí. Esto se llamará una única vez, en el main.
 	virtual void paso() {}		//Se llamará una vez por cada consumo de delta en el loop del kernel base.

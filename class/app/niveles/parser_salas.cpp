@@ -1,4 +1,5 @@
 #include "parser_salas.h"
+#include <class/lector_txt.h>
 //#include "../lectores/info_obstaculos_genericos.h"
 
 using namespace App_Niveles;
@@ -22,7 +23,7 @@ Parser_salas::Parser_salas()
 
 void Parser_salas::parsear_fichero(const std::string& ruta)
 {
-	DLibH::Lector_txt L(ruta, '#');
+	Herramientas_proyecto::Lector_txt L(ruta, '#');
 
 	if(!L)
 	{

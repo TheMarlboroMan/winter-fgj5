@@ -1,6 +1,7 @@
 #Definiciones.
 
-OPTIMIZACION=-O3
+#OPTIMIZACION=-O3
+OPTIMIZACION=-O0
 #SIMBOLOS_DEBUG=-g
 FLAGS_BASE=-Wno-deprecated -Wall -ansi -pedantic -std=c++11
 
@@ -10,9 +11,9 @@ CC=g++
 EJECUTABLE=winter.out
 LIMPIAR=rm -r objects/*; rm $(EJECUTABLE);
 
-DIR_HOME=/home/daniel/Escritorio/stuff/
+DIR_HOME=/home/dani/programacion/
 DIR_LIBDAN2=$(DIR_HOME)libdansdl2
-DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/class/
+DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/
 DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/objects/
 DIR_CAPA_COMPATIBILIDAD_LIBDANSDL2=$(DIR_HOME)capa_compatibilidad_libdansdl2
 

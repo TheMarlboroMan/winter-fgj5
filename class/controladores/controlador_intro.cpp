@@ -30,6 +30,7 @@ void Controlador_intro::loop(Input_base& input, float delta)
 		tiempo+=delta;
 		alpha=(tiempo * 255) / 2.0f;
 		if(alpha > 255) alpha=255;
+
 		rep_fondo.establecer_alpha(alpha);
 
 		if(input.hay_eventos_teclado_down() && alpha==255)

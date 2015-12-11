@@ -4,7 +4,7 @@
 #include <map>
 
 #include <herramientas/log_base/log_base.h>
-#include <tabla_animaciones.h>
+#include <class/tabla_animaciones.h>
 #include "../definiciones/animaciones.h"
 
 extern DLibH::Log_base LOG;
