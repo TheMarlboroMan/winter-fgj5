@@ -3,27 +3,30 @@
 OPTIMIZACION=-O3
 #SIMBOLOS_DEBUG=-g
 FLAGS_BASE=-Wno-deprecated -Wall -ansi -pedantic -std=c++11
-LINKARQUITECTURA=-lmingw32
-UNIDAD_DISCO=K
-MINGW32_INCLUDE=/mingw_dev/include
-MINGW32_LIB=/mingw_dev/lib
+UNIDAD_DISCO=C
+MINGW32_INCLUDE=/mingw/include
+MINGW32_LIB=/mingw/lib
+SDL2_INCLUDE=/SDLDev/include
+SDL2_LIB=/SDLDev/lib
 
-FLAGS_BASE= -DWINCOMPIL=1 -D__NO_INLINE__ -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
+FLAGS_BASE= -DWINCOMPIL=1 -D__NO_INLINE__ -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -I$(UNIDAD_DISCO):$(SDL2_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB) -L$(UNIDAD_DISCO):$(SDL2_LIB) -L$(DIR_LIBDAN2)
 
 CFLAGS=-c $(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CFLAGS_TARGET_FINAL=$(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CC=g++
 EJECUTABLE=winter.exe
-LIMPIAR=rm -r objects/*; rm $(EJECUTABLE);
+LIMPIAR=rmdir objects /s /q & del $(EJECUTABLE)
 
-DIR_HOME=$(UNIDAD_DISCO):/winter_build/
-DIR_LIBDAN2=$(DIR_HOME)libdansdl2
-DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/class/
-DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/objects/
+DIR_HOME=$(UNIDAD_DISCO):/Devel/
+DIR_LIBDAN2=$(DIR_HOME)libdansdl2-master
+DIR_CAPA_COMPATIBILIDAD=$(DIR_HOME)capa_compatibilidad_libdansdl2/
+DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master
+DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master/objects/
 
-LINKER=-L$(DIR_LIBDAN2) -lDanSDL2 $(LINKARQUITECTURA) -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -SDL2_ttf -static-libgcc -static-libstdc++
-INCLUDES=-I $(DIR_LIBDAN2) -I $(DIR_HERRAMIENTAS_PROYECTO)
+LINKER=-lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++ -lmingw32 -lDanSDL2
+
+INCLUDES=-I$(DIR_LIBDAN2) -I$(DIR_CAPA_COMPATIBILIDAD) -I$(DIR_HERRAMIENTAS_PROYECTO)
 LIBRERIAS=
-MKDIR=mkdir -p
+MKDIR=if not exist objects mkdir objects
 
 include makefile_comun
