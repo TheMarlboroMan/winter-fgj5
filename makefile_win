@@ -9,7 +9,7 @@ MINGW32_LIB=/mingw/lib
 SDL2_INCLUDE=/SDLDev/include
 SDL2_LIB=/SDLDev/lib
 
-FLAGS_BASE= -DWINCOMPIL=1 -D__NO_INLINE__ -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -I$(UNIDAD_DISCO):$(SDL2_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB) -L$(UNIDAD_DISCO):$(SDL2_LIB) -L$(DIR_LIBDAN2)
+FLAGS_BASE= -DWINCOMPIL=1 -D__NO_INLINE__ -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -I$(UNIDAD_DISCO):$(SDL2_INCLUDE)
 
 CFLAGS=-c $(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CFLAGS_TARGET_FINAL=$(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
@@ -23,10 +23,10 @@ DIR_CAPA_COMPATIBILIDAD=$(DIR_HOME)capa_compatibilidad_libdansdl2/
 DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master
 DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master/objects/
 
-LINKER=-lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++ -lmingw32 -lDanSDL2
+LINKER=-L$(UNIDAD_DISCO):$(MINGW32_LIB) -L$(UNIDAD_DISCO):$(SDL2_LIB) -L$(DIR_LIBDAN2) -lDanSDL2 -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++
 
 INCLUDES=-I$(DIR_LIBDAN2) -I$(DIR_CAPA_COMPATIBILIDAD) -I$(DIR_HERRAMIENTAS_PROYECTO)
 LIBRERIAS=
-MKDIR=if not exist objects mkdir objects
+MKDIR=if not exist objects mkdir
 
 include makefile_comun
