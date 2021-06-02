@@ -4,6 +4,7 @@
 #include "../class/controladores/controlador_intro.h"
 #include "../class/controladores/controlador_game_over.h"
 #include "../class/app/niveles/parser_salas.h"
+#include "../class/app/env.h"
 
 using namespace App;
 
@@ -12,7 +13,9 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	kernel.mut_mostrar_fps(false);
 	//Declaraciones de herramientas externas.
 	
-	Localizador loc("data/loc/loc");
+	std::string i8n_path=App::env::make_data_path("data/loc/loc");
+	
+	Localizador loc(i8n_path.c_str());
 	loc.inicializar(1);
 
 	std::vector<App_Niveles::Sala> salas;
@@ -28,8 +31,13 @@ void App::loop_aplicacion(Kernel_app& kernel)
 		
 		ss.str("");
 		ss<<"data/niveles/nivel"<<indice_nivel<<".dat";
-		LOG<<"Cargando "<<ss.str()<<std::endl;
-		parser.parsear_fichero(ss.str());
+
+		std::string lvl_str=ss.str();
+		std::string lvl_path=App::env::make_data_path(lvl_str);
+
+		LOG<<"Cargando "<<lvl_path<<std::endl;
+
+		parser.parsear_fichero(lvl_path);
 		salas.push_back(std::move(parser.acc_sala()));
 		++indice_nivel;
 	}

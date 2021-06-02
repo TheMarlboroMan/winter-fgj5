@@ -1,0 +1,8 @@
+[Desktop Entry]
+Categories=Game;
+Icon=winter
+Name=Winter
+Type=Application
+Exec=winter.out
+
+Name[en_US]=winter.desktop

@@ -1,5 +1,6 @@
 #include "representador.h"
 #include "../recursos.h"
+#include "../env.h"
 
 #include <sstream>
 
@@ -7,7 +8,7 @@ using namespace App_Graficos;
 using namespace App_Interfaces;
 
 Representador::Representador(const Animaciones& animaciones)
-	:bloque_transformacion(animaciones), hoja("data/recursos/hud.dat")
+	:bloque_transformacion(animaciones), hoja(App::env::make_data_path("data/recursos/hud.dat"))
 {
 
 }

@@ -1,4 +1,5 @@
 #include "animaciones.h"
+#include "../env.h"
 
 using namespace App_Graficos;
 
@@ -27,8 +28,14 @@ void Animaciones::cargar()
 		else animaciones.insert(std::make_pair(indice, Herramientas_proyecto::Tabla_animaciones(ts, ruta_animaciones)));
 	};
 
-	f("data/recursos/tiles.dat", "data/recursos/animaciones_tiles.dat", App_Definiciones::animaciones::celdas);
-	f("data/recursos/sprites.dat", "data/recursos/animaciones_sprites.dat", App_Definiciones::animaciones::sprites);
+	f(App::env::make_data_path("data/recursos/tiles.dat"), 
+		App::env::make_data_path("data/recursos/animaciones_tiles.dat"), 
+		App_Definiciones::animaciones::celdas
+	);
+	f(App::env::make_data_path("data/recursos/sprites.dat"), 
+		App::env::make_data_path("data/recursos/animaciones_sprites.dat"), 
+		App_Definiciones::animaciones::sprites
+	);
 }
 
 void Animaciones::turno(float d)

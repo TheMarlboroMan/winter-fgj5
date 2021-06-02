@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>net.caballorenoir.winter</id>
+
+  <name>Winter</name>
+  <summary>....</summary>
+
+  <metadata_license>MIT</metadata_license>
+  <project_license>Beerware</project_license>
+
+  <description>
+    <p>
+	...
+    </p>
+  </description>
+
+  <launchable type="desktop-id">winter.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://caballorenoir.net/hosted/games/images/winter-title.png</image>
+    </screenshot>
+    <screenshot>
+      <image>http://caballorenoir.net/hosted/games/images/winter-gameplay1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>http://caballorenoir.net/hosted/games/images/winter-gameplay2.png</image>
+    </screenshot>
+  </screenshots>
+</component>

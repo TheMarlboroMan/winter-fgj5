@@ -1,3 +1,5 @@
 winter.out
 objects/*
 data/logs/*
+*.AppImage
+AppDir

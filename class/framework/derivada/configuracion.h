@@ -2,6 +2,7 @@
 #define PROYECTO_SDL2_DERIVADA_CONFIGURACION_H
 
 #include "../base/configuracion_base.h"
+#include "../../app/env.h"
 
 class Configuracion: public Configuracion_base
 {
@@ -19,7 +20,7 @@ class Configuracion: public Configuracion_base
 	virtual void asignar_valores_por_defecto();
 	virtual void procesar_clave_y_valor(const std::string&, const std::string&);
 
-	std::string obtener_ruta_archivo() const {return "data/config/configuracion.dat";}
+	std::string obtener_ruta_archivo() const {return App::env::usr_path+"/configuracion.dat";}
 	std::string obtener_separador_archivo() const {return ":";}
 	std::string obtener_clave_version_archivo() const {return "v";}
 	std::string obtener_version_archivo() const {return "1";}

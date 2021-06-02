@@ -10,8 +10,12 @@ This project depends on some very specific commits of some old libraries. Long s
 4) update the main makefile so the dependencies point at these things you just built.
 5) build the main application.	
 
+# Bugs
+
+For some unexplained reason, sometimes the game starts up with a black screen and does nothing. I can see this in my netbook but I've seen it in real computers too.
 
 # Changelog
 
-- June 2021, AppImage build, bundling deps.
+- June, 3rd 2021, AppImage build.
+- June, 2nd 2021, bundling deps.
 - As of nov 5th 2015, the code has been patched to require the compatibility layer in the repository "capa_compatibilidad_libdansdl2" and to link with SDL2_tff (even though it is not used). Should the code be updated the compatibility layer will be removed.
