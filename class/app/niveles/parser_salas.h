@@ -29,6 +29,7 @@ class Parser_salas
 
 	bool							interpretar_estado(const std::string& linea);
 	void 							interpretar_linea_como_rejilla(const std::string& linea);
+	void 							interpretar_linea_como_meta(const std::string& linea);
 	void							interpretar_linea_como_celdas(const std::string& linea);
 	void							interpretar_linea_como_objeto(const std::string& linea);
 	int							toi(const std::string& s) {return std::atoi(s.c_str());};
@@ -42,7 +43,7 @@ class Parser_salas
 	void							interpretar_como_plataforma(const std::vector<std::string>&);
 
 
-	enum class 						t_estados {nada, estructura, info, rejilla, celdas, logica, objetos, fin};
+	enum class 						t_estados {nada, estructura, info, rejilla, celdas, logica, objetos, meta, fin};
 	
 	enum class destino_celdas {nada, logica, decoracion};
 
@@ -51,6 +52,8 @@ class Parser_salas
 	static const std::string 				TIPO_ESTRUCTURA;
 	static const std::string 				TIPO_FIN_ESTRUCTURA;
 	static const std::string 				TIPO_INFO;
+	static const std::string 				TIPO_META;
+	static const std::string 				TIPO_FIN_META;
 	static const std::string 				TIPO_REJILLA;
 	static const std::string 				TIPO_CELDAS;
 	static const std::string 				TIPO_CAMARA;

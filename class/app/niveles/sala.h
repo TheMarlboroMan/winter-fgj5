@@ -3,6 +3,7 @@
 
 #include <memory>
 
+
 #include <class/matriz2d.h>
 
 #include "celda.h"
@@ -16,7 +17,6 @@
 #include "../juego/entrada.h"
 #include "../juego/salida.h"
 #include "../juego/plataforma.h"
-
 
 namespace App_Niveles
 {
@@ -40,6 +40,7 @@ class Sala
 	void							actualizar_borrados();
 	void							eliminar_dinamica_disparos();	
 	void							eliminar_dinamica_bonus();
+	const int						get_name_index() const {return name_index;}
 
 
 	const Herramientas_proyecto::Matriz_2d<Celda>& 		acc_matriz() const {return celdas;}
@@ -64,7 +65,7 @@ class Sala
 	void							insertar_objeto(const App_Juego::Enemigo_disparador& v) {enemigos_disparador.push_back(v);}
 	void							insertar_objeto(const App_Juego::Enemigo_canon& v) {enemigos_canon.push_back(v);}
 	void							insertar_objeto(const App_Juego::Plataforma& v) {plataformas.push_back(v);}
-	
+	void							set_name_index(int _value) {name_index=_value;}
 
 	///////////
 	// Internas de la clase...
@@ -82,6 +83,7 @@ class Sala
 	std::vector<App_Juego::Enemigo_disparador>		enemigos_disparador;
 	std::vector<App_Juego::Enemigo_canon>			enemigos_canon;
 	std::vector<App_Juego::Plataforma>			plataformas;
+	int											name_index{0};
 };
 }
 #endif

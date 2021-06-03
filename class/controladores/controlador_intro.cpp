@@ -8,6 +8,12 @@ Controlador_intro::Controlador_intro(Director_estados& d, Localizador& loc, Conf
 	rep_fondo.establecer_modo_blend(DLibV::Representacion::BLEND_ALPHA);
 }
 
+void Controlador_intro::reset() {
+
+	tiempo=0.f;
+	alpha=0;
+}
+
 void Controlador_intro::preloop(Input_base& input, float delta)
 {
 

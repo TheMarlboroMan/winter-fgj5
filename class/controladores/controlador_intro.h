@@ -16,13 +16,14 @@ class Controlador_intro:public Controlador_base
 	virtual void 			postloop(Input_base& input, float delta);
 	virtual void 			loop(Input_base& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
+	void 					reset();
 
 	private:
 
 	DLibV::Representacion_bitmap_estatica rep_fondo;
 
-	float 				tiempo;
-	int				alpha;
+	float 				tiempo{0.f};
+	int				alpha{0};
 };
 
 #endif

@@ -230,3 +230,28 @@ bool Representador::es_flicker_animacion_color()
 {
 	return animacion_cambio_color.cambios && !animacion_cambio_color.tiempo;
 }
+
+void Representador::tick_show_title(float) {
+
+	//TODO:
+}
+
+bool Representador::is_show_title_done() const {
+
+	return true;
+}
+
+void Representador::reset_show_title() {
+
+	//TODO:
+}
+
+void Representador::show_title(
+	DLibV::Pantalla&, 
+	int
+) {
+
+	//TODO: Choose resource (100 is special, is the hub, can have 4 titles!!).
+	//TODO: Center resoruce horizontally on the screen...
+	//TODO: Display, I guess that also fade it out.
+}

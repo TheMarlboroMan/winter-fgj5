@@ -31,7 +31,7 @@ void Controlador_juego::reiniciar_estado_inicial()
 	estados_salas.insert(std::begin(estados_salas), salas.size(), false);
 
 	//Cargar la sala 0.
-	cargar_sala(INDICE_SALA_HUB);
+	cargar_sala(INDICE_SALA_HUB, true);
 }
 
 void Controlador_juego::procesar_cambio_presentacion()
@@ -56,12 +56,18 @@ void Controlador_juego::procesar_cambio_presentacion()
 	}
 }
 
-void Controlador_juego::cargar_sala(size_t s)
-{
-	if(s==INDICE_SALA_HUB)
-	{
+void Controlador_juego::cargar_sala(
+	size_t s,
+	bool _is_new_entry
+) {
+
+	is_new_room=_is_new_entry;
+
+	if(s==INDICE_SALA_HUB) 	{
+
 		procesar_cambio_presentacion();
 	}
+
 	sala_finalizada=indice_sala;
 	indice_sala=s;
 	sala_actual=salas.at(indice_sala);
@@ -99,6 +105,13 @@ void Controlador_juego::cargar_sala(size_t s)
 	{
 		App_Juego::Salida salida(369, 512, 9999, false);
 		sala_actual.insertar_objeto(salida);
+	}
+
+	//The last check is the special case for the hub, in which the animation
+	//has priority over the title, which always plays later.
+	if(is_new_room && 0!=sala_actual.get_name_index() && estado!=estados::animacion) {
+
+		show_title();
 	}
 }
 
@@ -153,6 +166,17 @@ void Controlador_juego::loop(Input_base& input, float delta)
 					default: break;
 				}
 			break;
+			case estados::show_title:
+
+				if(representador.is_show_title_done()) {
+
+					estado=estados::normal;
+				}
+				else {
+					representador.tick_show_title(delta);
+				}
+
+			break;
 		};
 	}
 }
@@ -175,7 +199,7 @@ void Controlador_juego::procesar_animacion_muerte(float delta, App_Juego::Jugado
 		else
 		{
 			estado=estados::normal;
-			cargar_sala(indice_sala);
+			cargar_sala(indice_sala, false);
 			datos_juego.disparos=App_Definiciones::Datos_juego::DISPAROS_DEFECTO;
 		}
 	}
@@ -191,7 +215,7 @@ void Controlador_juego::procesar_animacion_caida_fondo(float delta, Input_base& 
 	{
 		if(input.hay_eventos_teclado_down())
 		{
-			estado=estados::normal;
+			show_title();
 		}
 	}
 }
@@ -215,7 +239,7 @@ void Controlador_juego::procesar_animacion_cambio_color(float delta, Input_base&
 	{
 		if(input.hay_eventos_teclado_down())
 		{
-			estado=estados::normal;
+			show_title();
 		}
 	}
 }
@@ -225,7 +249,7 @@ void Controlador_juego::procesar_animacion_cambio_musica(float delta, Input_base
 	if(!estado_dinamicas.volumen_musica && input.hay_eventos_teclado_down())
 	{
 		Audio::detener_musica();
-		estado=estados::normal;
+		show_title();
 	}
 	else
 	{
@@ -392,6 +416,7 @@ void Controlador_juego::dibujar(DLibV::Pantalla& pantalla)
 
 	//Generar vista.
 	if(estado==estados::normal) evaluar_enfoque_camara();
+
 	representador.generar_vista(pantalla, camara, vr);
 	representador.generar_hud(pantalla, estado_dinamicas, datos_juego);
 
@@ -407,6 +432,11 @@ void Controlador_juego::dibujar(DLibV::Pantalla& pantalla)
 		}		
 
 		representador.generar_mensaje(pantalla, txt);
+	}
+
+	if(estado==estados::show_title) {
+
+		representador.show_title(pantalla, sala_actual.get_name_index());
 	}
 }
 
@@ -578,7 +608,7 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 				evaluar_fin_sala(indice_sala);
 
 				siguiente_sala=indice;
-				cargar_sala(siguiente_sala);
+				cargar_sala(siguiente_sala, true);
 				return;
 			}
 		}
@@ -717,4 +747,10 @@ void Controlador_juego::finalizar_juego()
 {
 	estado=estados::normal;
 	solicitar_cambio_estado(Director_estados::t_estados::the_end);
+}
+
+void Controlador_juego::show_title() {
+
+	representador.reset_show_title();
+	estado=estados::show_title;
 }

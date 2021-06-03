@@ -7,6 +7,8 @@ using namespace App_Niveles;
 const std::string Parser_salas::TIPO_ESTRUCTURA="[ESTRUCTURA]";
 const std::string Parser_salas::TIPO_FIN_ESTRUCTURA="[/ESTRUCTURA]";
 const std::string Parser_salas::TIPO_INFO="[INFO]";
+const std::string Parser_salas::TIPO_META="[META]";
+const std::string Parser_salas::TIPO_FIN_META="[/META]";
 const std::string Parser_salas::TIPO_REJILLA="[REJILLA]";
 const std::string Parser_salas::TIPO_CELDAS="[CELDAS]";
 const std::string Parser_salas::TIPO_CAMARA="[CAMARA]";
@@ -49,6 +51,7 @@ void Parser_salas::parsear_fichero(const std::string& ruta)
 					case t_estados::logica: 
 					case t_estados::fin: 
 					break;
+					case t_estados::meta: interpretar_linea_como_meta(linea); break;
 					case t_estados::rejilla: interpretar_linea_como_rejilla(linea); break;
 					case t_estados::celdas: interpretar_linea_como_celdas(linea); break;
 					case t_estados::objetos: interpretar_linea_como_objeto(linea); break;
@@ -65,6 +68,7 @@ bool Parser_salas::interpretar_estado(const std::string& linea)
 {
 	if(linea==TIPO_ESTRUCTURA) estado=t_estados::estructura;
 	else if(linea==TIPO_INFO) estado=t_estados::info;
+	else if(linea==TIPO_META) estado=t_estados::meta;
 	else if(linea==TIPO_REJILLA) estado=t_estados::rejilla;
 	else if(linea==TIPO_CELDAS) 
 	{
@@ -86,6 +90,7 @@ bool Parser_salas::interpretar_estado(const std::string& linea)
 		return true; //Hay que ejecutar una acción al cerrar la estructura.
 	}
 	else return true;
+
 	return false;
 }
 
@@ -263,4 +268,33 @@ void Parser_salas::interpretar_como_plataforma(const std::vector<std::string>& v
 	float tiempo_on=toi(valores[3]) / 1000.f, tiempo_off=toi(valores[4]) / 1000.f;
 	bool on=toi(valores[5]);
 	sala.insertar_objeto(App_Juego::Plataforma(x, y, tiempo_on, tiempo_off, on));
+}
+
+void Parser_salas::interpretar_linea_como_meta(
+	const std::string& _line
+) {
+
+	if(_line==TIPO_FIN_META) {
+
+		estado=t_estados::nada;
+		return;
+	}
+
+	std::cout<<"meta line" <<_line<<std::endl;
+
+	std::vector<std::string> pieces=Herramientas::explotar(_line, ':', 2);
+	if(2!=pieces.size()) {
+
+		throw std::runtime_error("ERROR: invalid meta line");
+	}
+
+	if(pieces[0]=="title") {
+
+		sala.set_name_index(toi(pieces[1]));
+	}
+	else {
+
+		throw std::runtime_error("ERROR: invalid meta property");
+	}
+
 }

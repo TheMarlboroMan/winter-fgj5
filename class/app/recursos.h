@@ -26,7 +26,11 @@ class Recursos_graficos
 		rt_fondo=6,
 		rt_intro=7,
 		rt_game_over=8,
-		rt_the_end=9
+		rt_the_end=9,
+//		rt_title_hub_round_0=10,
+//		rt_title_hub_round_1=11,
+//		rt_title_hub_round_2=12,
+//s		rt_title_hub_round_3=13
 
 	};
 };

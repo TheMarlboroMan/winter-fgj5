@@ -75,7 +75,10 @@ void App::loop_aplicacion(Kernel_app& kernel)
 
 			switch(DI.acc_estado_deseado())
 			{
-				case Director_estados::t_estados::intro: IC=&C_I; break;
+				case Director_estados::t_estados::intro: 
+					IC=&C_I; 
+					C_I.reset();
+				break;
 				case Director_estados::t_estados::juego: 
 					Audio::reproducir_musica(
 						DLibA::Gestor_recursos_audio::obtener_musica(App::Recursos_audio::rm_ballade));
@@ -88,7 +91,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 				case Director_estados::t_estados::the_end: 
 					IC=&C_GO; 
 					C_GO.activar_texto();
-				break;				
+				break;
 			}
 
 			DI.confirmar_cambio_estado();

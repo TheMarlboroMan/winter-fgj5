@@ -38,6 +38,10 @@ class Representador
 	void 					resetar_animaciones();
 	void 					procesar_animacion_fondo(float delta);
 	void 					procesar_animacion_color(float delta);
+	void					reset_show_title();
+	void					tick_show_title(float);
+	bool					is_show_title_done() const;
+	void					show_title(DLibV::Pantalla&, int);
 	bool					es_animacion_color_finalizada() const {return animacion_cambio_color.finalizada;}
 	bool					es_animacion_fondo_finalizada() const {return animacion_caida_fondo.finalizada;}
 	bool					es_flicker_animacion_color();

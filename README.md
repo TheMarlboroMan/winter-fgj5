@@ -10,9 +10,43 @@ This project depends on some very specific commits of some old libraries. Long s
 4) update the main makefile so the dependencies point at these things you just built.
 5) build the main application.	
 
-# Bugs
+# TODO:
 
-For some unexplained reason, sometimes the game starts up with a black screen and does nothing. I can see this in my netbook but I've seen it in real computers too.
+- Add credits+controls controller
+	- Same background
+	- No game title
+	- Info inside the frame.
+- Do the map title thing.
+	- Fades in, stays, fades out. Use the linear function thing and be done.
+	- The hub 
+		- A world unhinged
+		- A world with no color
+		- A world in silence
+	
+- Increment minor version number.
+- Add symbols over the hub doors.
+- Maybe one last level?
+
+# Notes to self.
+
+map01
+	exits to map 1, 3, 4
+map1
+	-> goes to map 2
+	map 2
+		-> goes to map 0
+map3
+	-> goes back to map 0
+map4
+	-> goes to map 5
+	map5
+		-> goes to map 4 or 6
+	map6
+		-> goes to map 7 or 8
+	map7
+		-> goes to map5
+	map8
+		-> goes to map0
 
 # Changelog
 

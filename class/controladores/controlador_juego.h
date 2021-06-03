@@ -53,7 +53,7 @@ class Controlador_juego:public Controlador_base
 	void				ajustar_camara_a_sala(const App_Niveles::Sala&);
 	void				evaluar_enfoque_camara();
 	void				evaluar_fin_sala(size_t);
-	void				cargar_sala(size_t);
+	void				cargar_sala(size_t, bool);
 	void				procesar_animacion_muerte(float delta, App_Juego::Jugador& j);
 	void				procesar_animacion_caida_fondo(float delta, Input_base& input);
 	void				procesar_animacion_cambio_color(float delta, Input_base& input);
@@ -63,8 +63,9 @@ class Controlador_juego:public Controlador_base
 	void				generar_humo(const App_Interfaces::Disparable&);
 	void				procesar_cambio_presentacion();
 	void				finalizar_juego();
+	void				show_title();
 
-	enum class estados		{normal, animacion_muerte, animacion} estado;
+	enum class estados		{normal, animacion_muerte, animacion, show_title} estado;
 
 	App_Definiciones::Estado_dinamicas estado_dinamicas;
 	App_Definiciones::Datos_juego	datos_juego;
@@ -80,6 +81,7 @@ class Controlador_juego:public Controlador_base
 	std::vector<bool>		estados_salas;	//Indica si las salas están o no finalizadas.
 	App_Niveles::Sala		sala_actual; //La sala actual es una copia de la referencia.
 	size_t				indice_sala, siguiente_sala, sala_finalizada;
+	bool				is_new_room{false};
 };
 
 #endif
