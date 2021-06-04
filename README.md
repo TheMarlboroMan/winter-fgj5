@@ -25,7 +25,8 @@ This project depends on some very specific commits of some old libraries. Long s
 	
 - Increment minor version number.
 - Add symbols over the hub doors.
-- Maybe one last level?
+- Maybe one last level? What would be point?
+- Feedback form when the game is done?
 
 # Notes to self.
 
