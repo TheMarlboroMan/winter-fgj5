@@ -15,9 +15,14 @@ This project depends on some very specific commits of some old libraries. Long s
 - Do the map title thing.
 	- Fades in, stays, fades out. Use the linear function thing and be done.
 	- The hub
+- leaves
 		- A world unhinged
 		- A world with no color
 		- A world in silence
+- footsteps over the fallen leaves
+- walking in circles
+- over the snow
+
 - Increment minor version number.
 - Add symbols over the hub doors.
 
