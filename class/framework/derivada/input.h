@@ -33,6 +33,7 @@ I_IZQUIERDA,
 I_DERECHA,
 I_ARRIBA,
 I_ABAJO,
+I_HELP
 
 };
 
@@ -41,7 +42,7 @@ I_ABAJO,
 
 	public:
 
-	virtual void configurar();	
+	virtual void configurar();
 	Input():Input_base() {}
 };
 

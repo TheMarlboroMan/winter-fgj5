@@ -20,7 +20,19 @@ class Controlador_intro:public Controlador_base
 
 	private:
 
-	DLibV::Representacion_bitmap_estatica rep_fondo;
+	void 			loop_fadein(Input_base& input, float delta);
+	void 			loop_fadeout(Input_base& input, float delta);
+	void 			loop_title(Input_base& input, float delta);
+	void 			loop_to_credits(Input_base& input, float delta);
+	void 			loop_credits(Input_base& input, float delta);
+	void 			loop_to_title(Input_base& input, float delta);
+
+
+	DLibV::Representacion_bitmap_estatica rep_fondo,
+										rep_credits;
+
+	enum class states{fadein, title, to_credits, credits, to_title, fadeout};
+	states state{states::fadein};
 
 	float 				tiempo{0.f};
 	int				alpha{0};

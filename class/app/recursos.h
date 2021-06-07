@@ -27,6 +27,7 @@ class Recursos_graficos
 		rt_intro=7,
 		rt_game_over=8,
 		rt_the_end=9,
+		rt_credits=10
 //		rt_title_hub_round_0=10,
 //		rt_title_hub_round_1=11,
 //		rt_title_hub_round_2=12,
@@ -53,7 +54,8 @@ class Recursos_audio
 		rs_item=3,
 		rs_nivel_finalizado=4,
 		rs_salto=5,
-		rs_perder_vida=6
+		rs_perder_vida=6,
+		rs_wind=7
 	};
 };
 

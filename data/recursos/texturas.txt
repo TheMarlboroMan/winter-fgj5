@@ -8,3 +8,4 @@
 7	data/graficos/intro.png	0	0	0	0
 8	data/graficos/game_over.png	0	0	0	0
 9	data/graficos/game_over_2.png	0	0	0	0
+10	data/graficos/credits.png	0	0	0	0

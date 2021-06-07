@@ -9,4 +9,6 @@ void Input::configurar()
 
 	mapa_teclado.insert(std::make_pair(I_IZQUIERDA, SDL_SCANCODE_LEFT));
 	mapa_teclado.insert(std::make_pair(I_DERECHA, SDL_SCANCODE_RIGHT));
+
+	mapa_teclado.insert(std::make_pair(I_HELP, SDL_SCANCODE_F1));
 }

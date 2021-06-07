@@ -8,25 +8,18 @@ This project depends on some very specific commits of some old libraries. Long s
 2) update the dependencies/tools makefile so the libdansdl2 paths match what you built in step 1
 3) build dependencies/tools
 4) update the main makefile so the dependencies point at these things you just built.
-5) build the main application.	
+5) build the main application.
 
 # TODO:
 
-- Add credits+controls controller
-	- Same background
-	- No game title
-	- Info inside the frame.
 - Do the map title thing.
 	- Fades in, stays, fades out. Use the linear function thing and be done.
-	- The hub 
+	- The hub
 		- A world unhinged
 		- A world with no color
 		- A world in silence
-	
 - Increment minor version number.
 - Add symbols over the hub doors.
-- Maybe one last level? What would be point?
-- Feedback form when the game is done?
 
 # Notes to self.
 

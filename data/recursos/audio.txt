@@ -7,5 +7,6 @@
 4	data/sonidos/nivel_finalizado.ogg
 5	data/sonidos/salto.ogg
 6	data/sonidos/perder_vida.ogg
+7	data/sonidos/viento.ogg
 
 #Sonidos de aplicacion...
