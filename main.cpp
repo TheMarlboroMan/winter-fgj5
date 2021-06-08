@@ -9,10 +9,10 @@
 	#include <libloaderapi.h>
 	#include <fileapi.h>
 
-#else 
+#else
 	#include <unistd.h>
 	#include <sys/stat.h>
-	
+
 #endif
 
 
@@ -56,15 +56,15 @@ int main(int argc, char ** argv)
 			std::cout<<e.what()<<std::endl;
 		}
 	}
-	
+
 	DLibH::Log_motor::finalizar();
-	DLibH::Herramientas_SDL::apagar_SDL();	
+	DLibH::Herramientas_SDL::apagar_SDL();
 
 	return 0;
 }
 
 void dump_file(
-	const std::string& _in, 
+	const std::string& _in,
 	const std::string& _out
 ) {
 
@@ -89,13 +89,13 @@ void ready_system() {
 	int bytes=GetModuleFileNameA(nullptr, buff.data(), 1024);
 
 	std::string executable_path=std::string{std::begin(buff), std::begin(buff)+bytes};
-	
+
 	auto last_slash=executable_path.find_last_of("\\");
 	std::string executable_dir=executable_path.substr(0, last_slash)+"\\";
-	
-	App::env::set_data_path(executable_dir);
+
+	App::env::data_path=executable_dir;
 	App::env::usr_path=executable_dir+"user\\";
-	
+
 	std::string logs_path=App::env::usr_path+"\\logs\\";
 	CreateDirectoryA(logs_path.c_str(), nullptr);
 	CreateDirectoryA(App::env::usr_path.c_str(), nullptr);
@@ -106,7 +106,7 @@ void ready_system() {
 	);
 }
 
-#else 
+#else
 
 void ready_system() {
 
