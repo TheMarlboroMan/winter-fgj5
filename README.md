@@ -12,6 +12,7 @@ This project depends on some very specific commits of some old libraries. Long s
 
 # Changelog
 
+- June, 8th 2021, version 1.1 (titles, credits, fixes)
 - June, 3rd 2021, AppImage build.
 - June, 2nd 2021, bundling deps.
 - As of nov 5th 2015, the code has been patched to require the compatibility layer in the repository "capa_compatibilidad_libdansdl2" and to link with SDL2_tff (even though it is not used). Should the code be updated the compatibility layer will be removed.
