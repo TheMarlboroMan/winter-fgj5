@@ -10,43 +10,6 @@ This project depends on some very specific commits of some old libraries. Long s
 4) update the main makefile so the dependencies point at these things you just built.
 5) build the main application.
 
-# TODO:
-
-- Do the map title thing.
-	- Fades in, stays, fades out. Use the linear function thing and be done.
-	- The hub
-- leaves
-		- A world unhinged
-		- A world with no color
-		- A world in silence
-- footsteps over the fallen leaves
-- walking in circles
-- over the snow
-
-- Increment minor version number.
-- Add symbols over the hub doors.
-
-# Notes to self.
-
-map01
-	exits to map 1, 3, 4
-map1
-	-> goes to map 2
-	map 2
-		-> goes to map 0
-map3
-	-> goes back to map 0
-map4
-	-> goes to map 5
-	map5
-		-> goes to map 4 or 6
-	map6
-		-> goes to map 7 or 8
-	map7
-		-> goes to map5
-	map8
-		-> goes to map0
-
 # Changelog
 
 - June, 3rd 2021, AppImage build.

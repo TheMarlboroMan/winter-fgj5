@@ -14,8 +14,8 @@ Representador::Representador(const Animaciones& animaciones)
 }
 
 unsigned int Representador::generar_vista(
-	DLibV::Pantalla& pantalla, 
-	DLibV::Camara& camara, 
+	DLibV::Pantalla& pantalla,
+	DLibV::Camara& camara,
 	const std::vector<const Representable *>& v)
 {
 	unsigned int total=0;
@@ -28,14 +28,14 @@ unsigned int Representador::generar_vista(
 			r->transformar_bloque(bloque_transformacion.mut_ciclo(c++));
 			if(bloque_transformacion.rep->volcar(pantalla, camara)) ++total;
 		}
-		
+
 	}
 
 	return total;
 }
 
 unsigned int Representador::generar_vista(
-	DLibV::Pantalla& pantalla, 
+	DLibV::Pantalla& pantalla,
 	const std::vector<const Representable *>& v)
 {
 	unsigned int total=0;
@@ -79,7 +79,7 @@ void Representador::generar_hud(DLibV::Pantalla& pantalla, const App_Definicione
 
 			++i;
 			y+=SEPARACION_DISPAROS;
-		}		
+		}
 	}
 
 	if(ed.con_bonus)
@@ -122,7 +122,7 @@ void Representador::generar_hud(DLibV::Pantalla& pantalla, const App_Definicione
 
 			++i;
 			x+=SEPARACION_VIDA;
-		}	
+		}
 	}
 }
 
@@ -150,7 +150,7 @@ void Representador::generar_fondo(DLibV::Pantalla& pantalla, const DLibH::Caja<f
 		float pos_x=animacion_caida_fondo.tiempo ? animacion_caida_fondo.pos_fondo_x : caja.origen.x;
 		float pos_y=animacion_caida_fondo.tiempo ? animacion_caida_fondo.pos_fondo_y : caja.origen.y;
 
-		bloque_transformacion.establecer_posicion(pos_x, pos_y, caja.w, caja.h);	
+		bloque_transformacion.establecer_posicion(pos_x, pos_y, caja.w, caja.h);
 
 		if(animacion_caida_fondo.angulo_rotacion)
 		{
@@ -220,7 +220,7 @@ void Representador::procesar_animacion_color(float delta)
 	if(animacion_cambio_color.tiempo >= 0.5)
 	{
 		++animacion_cambio_color.cambios;
-		animacion_cambio_color.tiempo=0.0;		
+		animacion_cambio_color.tiempo=0.0;
 	}
 
 	animacion_cambio_color.finalizada=animacion_cambio_color.cambios==7;
@@ -231,27 +231,34 @@ bool Representador::es_flicker_animacion_color()
 	return animacion_cambio_color.cambios && !animacion_cambio_color.tiempo;
 }
 
-void Representador::tick_show_title(float) {
+void Representador::tick_show_title(
+	float _delta
+) {
 
-	//TODO:
+	title_transition_out.tick(_delta);
 }
 
 bool Representador::is_show_title_done() const {
 
-	return true;
+	return title_transition_out.is_done();
 }
 
 void Representador::reset_show_title() {
 
-	//TODO:
+	title_transition_out.reset();
 }
 
 void Representador::show_title(
-	DLibV::Pantalla&, 
-	int
+	DLibV::Pantalla& _screen,
+	int _resource_id
 ) {
+	auto tex=DLibV::Gestor_texturas::obtener(_resource_id);
 
-	//TODO: Choose resource (100 is special, is the hub, can have 4 titles!!).
-	//TODO: Center resoruce horizontally on the screen...
-	//TODO: Display, I guess that also fade it out.
+	DLibV::Representacion_bitmap_estatica title(tex);
+	title.establecer_recorte(0, 0, tex->acc_w(), tex->acc_h());
+	title.establecer_posicion((800/2)-(tex->acc_w()/2), 110, tex->acc_w(), tex->acc_h());
+	title.establecer_modo_blend(DLibV::Representacion::BLEND_ALPHA);
+	title.establecer_alpha(title_transition_out.alpha);
+
+	title.volcar(_screen);
 }

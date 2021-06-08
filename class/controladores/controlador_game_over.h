@@ -16,6 +16,7 @@ class Controlador_game_over:public Controlador_base
 	virtual void 			postloop(Input_base& input, float delta);
 	virtual void 			loop(Input_base& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
+	void                reset();
 
 	void				activar_texto() {rep_the_end.cambiar_visibilidad(true);}
 	void				desactivar_texto() {rep_the_end.cambiar_visibilidad(false);}

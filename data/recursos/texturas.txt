@@ -9,3 +9,13 @@
 8	data/graficos/game_over.png	0	0	0	0
 9	data/graficos/game_over_2.png	0	0	0	0
 10	data/graficos/credits.png	0	0	0	0
+20	data/graficos/title_cycle_1_1.png	2	0	0	0
+21	data/graficos/title_cycle_1_2.png	2	0	0	0
+22	data/graficos/title_cycle_2_1.png	2	0	0	0
+23	data/graficos/title_cycle_2_2.png	2	0	0	0
+24	data/graficos/title_cycle_2_3.png	2	0	0	0
+25	data/graficos/title_cycle_3.png	2	0	0	0
+26	data/graficos/title_hub_1.png	2	0	0	0
+27	data/graficos/title_hub_2.png	2	0	0	0
+28	data/graficos/title_hub_3.png	2	0	0	0
+29	data/graficos/title_hub_4.png	2	0	0	0

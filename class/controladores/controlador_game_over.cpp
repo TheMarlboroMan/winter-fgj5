@@ -10,7 +10,16 @@ Controlador_game_over::Controlador_game_over(Director_estados& d, Localizador& l
 	rep_the_end.ir_a(230, 320);
 
 	rep_game_over.establecer_modo_blend(DLibV::Representacion::BLEND_ALPHA);
+	rep_game_over.establecer_alpha(0);
 	rep_the_end.establecer_modo_blend(DLibV::Representacion::BLEND_ALPHA);
+	rep_the_end.establecer_alpha(0);
+}
+
+void Controlador_game_over::reset() {
+
+	tiempo=.0f;
+	alpha=0;
+	alpha_the_end=0;
 }
 
 void Controlador_game_over::preloop(Input_base& input, float delta)
@@ -29,24 +38,23 @@ void Controlador_game_over::loop(Input_base& input, float delta)
 	if(input.es_senal_salida() || input.es_input_down(Input::I_ESCAPE))
 	{
 		abandonar_aplicacion();
+		return;
 	}
-	else
-	{
-		tiempo+=delta;
 
-		alpha=(tiempo * 255) / 2.0f;
-		if(alpha > 255) alpha=255;
+	tiempo+=delta;
 
-		alpha_the_end=(tiempo * 255) / 5.0f;
-		if(alpha_the_end > 255) alpha_the_end=255;
+	alpha=(tiempo * 255) / 2.0f;
+	if(alpha > 255) alpha=255;
 
-		rep_game_over.establecer_alpha(alpha);
-		rep_the_end.establecer_alpha(alpha_the_end);
+	alpha_the_end=(tiempo * 255) / 5.0f;
+	if(alpha_the_end > 255) alpha_the_end=255;
 
-		if(input.hay_eventos_teclado_down() && alpha > 200)
-		{
-			solicitar_cambio_estado(Director_estados::t_estados::intro);
-		}
+	rep_game_over.establecer_alpha(alpha);
+	rep_the_end.establecer_alpha(alpha_the_end);
+
+	if(input.hay_eventos_teclado_down() && alpha > 200) {
+
+		solicitar_cambio_estado(Director_estados::t_estados::intro);
 	}
 }
 

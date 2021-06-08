@@ -169,4 +169,15 @@ void Controlador_intro::dibujar(DLibV::Pantalla& pantalla)
 	pantalla.limpiar(0, 0, 0, 255);
 	rep_fondo.volcar(pantalla);
 	rep_credits.volcar(pantalla);
+/*
+	auto tex=DLibV::Gestor_texturas::obtener(20);
+
+	DLibV::Representacion_bitmap_estatica title(tex);
+	title.establecer_recorte(0, 0, tex->acc_w(), tex->acc_h());
+	title.establecer_posicion((800/2)-(tex->acc_w()/2), 200, tex->acc_w(), tex->acc_h());
+	title.establecer_modo_blend(DLibV::Representacion::BLEND_ALPHA);
+	title.establecer_alpha(255);
+
+	title.volcar(pantalla);
+*/
 }

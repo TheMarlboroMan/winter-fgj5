@@ -2,16 +2,16 @@
 #define SELECTOR_ALEATORIO_H
 
 /**
-* Template para obtener objetos "aleatorios" de un vector previamente 
+* Template para obtener objetos "aleatorios" de un vector previamente
 * alimentado. A cada objeto insertado en el vector se le añade una probabilidad.
 * Cuando se llama a obtener se escoge uno de acuerdo con la probabilidad y se
 * devuelve.
 * Las probabilidades hay que especificarlas a mano y siempre dentro del rango
 * 1 - max (100 por defecto). Si la suma de todas las probabilidades es menor
-* del máximo especificado hay posibilidad de que se tiren excepciones al 
+* del máximo especificado hay posibilidad de que se tiren excepciones al
 * intentar obtener un valor.
-* Abajo está el template uniforme, en que cada elemento tiene las mismas 
-* posibilidades de salir. 
+* Abajo está el template uniforme, en que cada elemento tiene las mismas
+* posibilidades de salir.
 * Ambos comparten la misma base.
 */
 
@@ -51,10 +51,10 @@ class Selector_aleatorio_variable
 	// Propiedades
 	private:
 
-	/* 
-	* A cada item que se inserte se sumará la base. La base crece según el 
-	* valor "porcentaje" para asegurarnos de que en el vector están 
-	* ordenados por secciones. 
+	/*
+	* A cada item que se inserte se sumará la base. La base crece según el
+	* valor "porcentaje" para asegurarnos de que en el vector están
+	* ordenados por secciones.
 	*/
 
 	unsigned int base;
@@ -90,8 +90,8 @@ class Selector_aleatorio_variable
 	}
 
 	/**
-	* @param unsigned int max 
-	* Establece el máximo porcentaje posible para el generador de números. 
+	* @param unsigned int max
+	* Establece el máximo porcentaje posible para el generador de números.
 	* Por defecto es 100.
 	*/
 
@@ -111,7 +111,7 @@ class Selector_aleatorio_variable
 		//TODO: Debug...
 		unsigned int val=G();
 
-		std::cout<<val<<" ES VAL"<<std::endl;
+//		std::cout<<val<<" ES VAL"<<std::endl;
 		for(const T& t : items) std::cout<<t.porcentaje<<"% "<<std::endl;
 
 
@@ -161,7 +161,7 @@ class Selector_aleatorio_uniforme
 		size_t tam=items.size();
 		if(!tam) throw SelectorAleatorioException("El vector está vacío", 0);
 		else if(tam==1) return items[0];
-		
+
 		Generador_int G(0, tam-1);
 		size_t val=G();
 		return items[val];

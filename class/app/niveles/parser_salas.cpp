@@ -14,7 +14,7 @@ const std::string Parser_salas::TIPO_CELDAS="[CELDAS]";
 const std::string Parser_salas::TIPO_CAMARA="[CAMARA]";
 const std::string Parser_salas::TIPO_LOGICA="[LOGICA]";
 const std::string Parser_salas::TIPO_OBJETOS="[OBJETOS]";
-		
+
 
 Parser_salas::Parser_salas()
 	:d_celdas(destino_celdas::nada), estado(t_estados::nada),
@@ -33,7 +33,7 @@ void Parser_salas::parsear_fichero(const std::string& ruta)
 		throw std::runtime_error("Imposible localizar nivel en fichero");
 	}
 	else
-	{	
+	{
 		std::string linea;
 
 		while(true)
@@ -45,11 +45,11 @@ void Parser_salas::parsear_fichero(const std::string& ruta)
 			{
 				switch(estado)
 				{
-					case t_estados::nada: 
-					case t_estados::estructura: 
-					case t_estados::info: 
-					case t_estados::logica: 
-					case t_estados::fin: 
+					case t_estados::nada:
+					case t_estados::estructura:
+					case t_estados::info:
+					case t_estados::logica:
+					case t_estados::fin:
 					break;
 					case t_estados::meta: interpretar_linea_como_meta(linea); break;
 					case t_estados::rejilla: interpretar_linea_como_rejilla(linea); break;
@@ -70,7 +70,7 @@ bool Parser_salas::interpretar_estado(const std::string& linea)
 	else if(linea==TIPO_INFO) estado=t_estados::info;
 	else if(linea==TIPO_META) estado=t_estados::meta;
 	else if(linea==TIPO_REJILLA) estado=t_estados::rejilla;
-	else if(linea==TIPO_CELDAS) 
+	else if(linea==TIPO_CELDAS)
 	{
 		//Cada vez que encuentre una, aumentamos el destino.
 		switch(d_celdas)
@@ -81,10 +81,10 @@ bool Parser_salas::interpretar_estado(const std::string& linea)
 		}
 
 		estado=t_estados::celdas;
-	}	
+	}
 	else if(linea==TIPO_LOGICA) estado=t_estados::logica;
 	else if(linea==TIPO_OBJETOS)  estado=t_estados::objetos;
-	else if(linea==TIPO_FIN_ESTRUCTURA) 
+	else if(linea==TIPO_FIN_ESTRUCTURA)
 	{
 		estado=t_estados::fin;
 		return true; //Hay que ejecutar una acción al cerrar la estructura.
@@ -128,7 +128,7 @@ void Parser_salas::interpretar_linea_como_celdas(const std::string& linea)
 			case destino_celdas::logica:
 			{
 				App_Niveles::Celda::tipo_celda t=App_Niveles::Celda::tipo_celda::solida;
-		
+
 				switch(tipo)
 				{
 					case 1: t=App_Niveles::Celda::tipo_celda::solida; break;
@@ -140,7 +140,7 @@ void Parser_salas::interpretar_linea_como_celdas(const std::string& linea)
 				sala.insertar_celda(x, y, t);
 			}
 			break;
-			case destino_celdas::decoracion: 
+			case destino_celdas::decoracion:
 				sala.insertar_celda_decorativa(x, y, toi(partes[2]));
 			break;
 		}
@@ -241,7 +241,7 @@ void Parser_salas::interpretar_como_enemigo_disparador(const std::vector<std::st
 	}
 
 	const auto x=toi(valores[1]), y=toi(valores[2]), salud=toi(valores[4]);
-	float tiempo=toi(valores[3]) / 1000.f; 
+	float tiempo=toi(valores[3]) / 1000.f;
 	sala.insertar_objeto(App_Juego::Enemigo_disparador(x, y, tiempo, salud));
 }
 
@@ -279,8 +279,6 @@ void Parser_salas::interpretar_linea_como_meta(
 		estado=t_estados::nada;
 		return;
 	}
-
-	std::cout<<"meta line" <<_line<<std::endl;
 
 	std::vector<std::string> pieces=Herramientas::explotar(_line, ':', 2);
 	if(2!=pieces.size()) {

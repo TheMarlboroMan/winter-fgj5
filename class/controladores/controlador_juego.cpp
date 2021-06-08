@@ -22,7 +22,7 @@ void Controlador_juego::reiniciar_estado_inicial()
 	indice_sala=0;
 	siguiente_sala=0;
 	sala_finalizada=0;
-	
+
 	representador.resetar_animaciones();
 	Audio::establecer_volumen_musica(acc_configuracion().acc_volumen_musica());
 
@@ -38,7 +38,7 @@ void Controlador_juego::procesar_cambio_presentacion()
 {
 	switch(datos_juego.cambios_efectuados)
 	{
-		case 0: 
+		case 0:
 			LOG<<"Cambio presentación sin efecto"<<std::endl;
 		break;
 		case 1: //Primer cambio... Se cae el fondo.
@@ -99,6 +99,7 @@ void Controlador_juego::cargar_sala(
 
 	const auto& entrada=sala_actual.acc_entrada();
 	jugador.restaurar_a_inicio_nivel(entrada.acc_espaciable_cx() - (entrada.acc_espaciable_w() / 2), entrada.acc_espaciable_fy()-jugador.acc_espaciable_h()-1);
+	evaluar_enfoque_camara();
 
 	//Cuando no quedan dinámicas de juego podemos insertar la última salida a pelo, que lleva al final del juego...
 	if(!estado_dinamicas.con_bonus && !estado_dinamicas.con_disparo && !estado_dinamicas.con_vidas)
@@ -173,6 +174,7 @@ void Controlador_juego::loop(Input_base& input, float delta)
 					estado=estados::normal;
 				}
 				else {
+
 					representador.tick_show_title(delta);
 				}
 
@@ -318,7 +320,7 @@ void Controlador_juego::procesar_proyectiles(float delta)
 			{
 				p.mut_borrar(true);
 				d->recibir_disparo(p.acc_potencia());
-				if(d->es_disparable_borrar()) 
+				if(d->es_disparable_borrar())
 				{
 					datos_juego.puntuacion+=d->acc_puntos();
 					generar_humo(*d);
@@ -337,7 +339,7 @@ void Controlador_juego::procesar_proyectiles(float delta)
 		{
 			p.mut_borrar(true);
 			continue;
-		}		
+		}
 	}
 
 	for(auto &p: proyectiles_enemigos)
@@ -395,7 +397,7 @@ void Controlador_juego::dibujar(DLibV::Pantalla& pantalla)
 	DLibH::Caja<float, int> caja_fondo(camara.acc_caja_pos().x, camara.acc_caja_pos().y, camara.acc_caja_pos().w, camara.acc_caja_pos().h);
 
 	representador.generar_fondo(pantalla, caja_fondo, camara.acc_x(), camara.acc_y(), sala_actual.acc_w() * App_Definiciones::definiciones::dim_celda, sala_actual.acc_h() * App_Definiciones::definiciones::dim_celda);
-	
+
 	std::vector<const App_Interfaces::Representable *> vr=sala_actual.obtener_vector_representables();
 	for(const auto &p : humos) vr.push_back(&p);
 	for(const auto &p : proyectiles) vr.push_back(&p);
@@ -404,8 +406,8 @@ void Controlador_juego::dibujar(DLibV::Pantalla& pantalla)
 
 	struct Ordenador_representables
 	{
-		public: 
-	
+		public:
+
 		bool operator()(const App_Interfaces::Representable* a, const App_Interfaces::Representable* b) const
 		{
 			return a->obtener_profundidad_ordenacion() < b->obtener_profundidad_ordenacion();
@@ -426,17 +428,31 @@ void Controlador_juego::dibujar(DLibV::Pantalla& pantalla)
 		std::string txt("");
 		switch(sala_finalizada)
 		{
-			case INDICE_SALA_FIN_DISPARO: txt=texto_localizado(App_Definiciones::definiciones_loc::txt_disparo); break; 
-			case INDICE_SALA_FIN_BONUS: txt=texto_localizado(App_Definiciones::definiciones_loc::txt_bonus); break; 
-			case INDICE_SALA_FIN_VIDAS: txt=texto_localizado(App_Definiciones::definiciones_loc::txt_vidas); break; 
-		}		
+			case INDICE_SALA_FIN_DISPARO: txt=texto_localizado(App_Definiciones::definiciones_loc::txt_disparo); break;
+			case INDICE_SALA_FIN_BONUS: txt=texto_localizado(App_Definiciones::definiciones_loc::txt_bonus); break;
+			case INDICE_SALA_FIN_VIDAS: txt=texto_localizado(App_Definiciones::definiciones_loc::txt_vidas); break;
+		}
 
 		representador.generar_mensaje(pantalla, txt);
 	}
 
 	if(estado==estados::show_title) {
 
-		representador.show_title(pantalla, sala_actual.get_name_index());
+		int index=sala_actual.get_name_index();
+
+		//especial hub...
+		if(index==100) {
+
+			switch(datos_juego.cambios_efectuados) {
+
+				case 0: index=26; break;
+				case 1: index=27; break;
+				case 2: index=28; break;
+				case 3: index=29; break;
+			}
+		}
+
+		representador.show_title(pantalla, index);
 	}
 }
 
@@ -449,7 +465,7 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 	struct Hay_celda_letal_y_trunca_no_celdas
 	{
 		int es_letal;
-		
+
 		void operator()(std::vector<const App_Niveles::Celda *>& resultado)
 		{
 			//Mirar si hay alguna letal.
@@ -474,7 +490,7 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 	{
 		Calculador_colisiones CC;
 		auto colisiones_caida=CC.solidos_en_caja_sala(jugador.caja_comprobar_caida(), sala_actual);
-		if(!colisiones_caida.size()) 
+		if(!colisiones_caida.size())
 		{
 			jugador.establecer_en_caida();
 		}
@@ -510,7 +526,7 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 	//si ha colisionado con celdas letales.
 	bool celda_letal=false;
 	auto v=j.acc_vector();
-	if(v.y) 
+	if(v.y)
 	{
 		jugador.desplazar_caja(0.0, v.y * delta);
 		Calculador_colisiones CC;
@@ -519,25 +535,25 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 
 		//Eliminar todos aquellos que sean "es_plataforma" que estén por debajo del jugador".
 		//ojo: !es_sobre != es_bajo...
-		//Otra forma de decirlo: para tener en cuenta a una plataforma, la posición anterior tiene que haber estado "encima". 
-		auto fin=std::remove_if(colisiones.begin(), colisiones.end(), [&pos_anterior](const App_Interfaces::Espaciable* e) 
+		//Otra forma de decirlo: para tener en cuenta a una plataforma, la posición anterior tiene que haber estado "encima".
+		auto fin=std::remove_if(colisiones.begin(), colisiones.end(), [&pos_anterior](const App_Interfaces::Espaciable* e)
 		{
 			return e->es_plataforma() && !App_Interfaces::Espaciable::es_sobre(pos_anterior, e->copia_caja());
-		});	
+		});
 		colisiones.erase(fin, colisiones.end());
 		if(colisiones.size()) AJ.ajustar_colisiones_eje_y_actor_movil_con_espaciables(jugador, colisiones);
 		celda_letal=celda_letal || hay_celda_letal_y_trunca_no_celdas.es_letal;
 	}
 
-	if(v.x) 
+	if(v.x)
 	{
 		jugador.desplazar_caja(v.x * delta, 0.0);
 		Calculador_colisiones CC;
 		Ajustador AJ;
 		auto colisiones=CC.solidos_en_caja_sala(jugador.copia_caja(), sala_actual, hay_celda_letal_y_trunca_no_celdas);
-		
+
 		//Eliminar todos aquellos que sean "es_plataforma" que estén por debajo del jugador".
-		auto fin=std::remove_if(colisiones.begin(), colisiones.end(), [&pos_anterior](const App_Interfaces::Espaciable* e) 
+		auto fin=std::remove_if(colisiones.begin(), colisiones.end(), [&pos_anterior](const App_Interfaces::Espaciable* e)
 		{
 			return e->es_plataforma() && !App_Interfaces::Espaciable::es_sobre(pos_anterior, e->copia_caja());
 		});
@@ -546,7 +562,7 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 		celda_letal=celda_letal || hay_celda_letal_y_trunca_no_celdas.es_letal;
 	}
 
-	//Las colisiones con objetos de juego se evaluan en la posición final.	
+	//Las colisiones con objetos de juego se evaluan en la posición final.
 	auto &bonus=sala_actual.ref_bonus();
 	for(auto &b : bonus)
 	{
@@ -558,7 +574,7 @@ void Controlador_juego::procesar_jugador(App_Juego::Jugador& j, float delta, App
 	{
 		perder_vida();
 	}
-	else 
+	else
 	{
 		//Son espaciables...
 		const auto& letales=sala_actual.acc_objetos_letales();
@@ -633,7 +649,7 @@ void Controlador_juego::evaluar_enfoque_camara()
 /**
 * Establece los límites de la cámara según la sala. Adicionalmente puede cambiar
 * el tamaño y la posición de la cámara para salas más pequeñas que la misma.
-*/ 
+*/
 
 void Controlador_juego::ajustar_camara_a_sala(const App_Niveles::Sala& s)
 {
@@ -648,13 +664,13 @@ void Controlador_juego::ajustar_camara_a_sala(const App_Niveles::Sala& s)
 
 	if(w_sala < definiciones::w_vista || h_sala < definiciones::h_vista)
 	{
-		if(w_sala < definiciones::w_vista) 
+		if(w_sala < definiciones::w_vista)
 		{
 			w_pos=w_sala;
 			x_pos=(definiciones::w_vista - w_sala) / 2;
 		}
 
-		if(h_sala < definiciones::h_vista) 
+		if(h_sala < definiciones::h_vista)
 		{
 			h_pos=h_sala;
 			y_pos=(definiciones::h_vista - h_sala) / 2;
@@ -691,18 +707,18 @@ void Controlador_juego::evaluar_fin_sala(size_t indice)
 
 	switch(indice)
 	{
-		case INDICE_SALA_FIN_DISPARO: 
+		case INDICE_SALA_FIN_DISPARO:
 			estado_dinamicas.con_disparo=false;
 			++datos_juego.cambios_efectuados;
 		break;
 
-		case INDICE_SALA_FIN_BONUS: 
+		case INDICE_SALA_FIN_BONUS:
 			estado_dinamicas.con_bonus=false;
 			++datos_juego.cambios_efectuados;
 		break;
 
-		case INDICE_SALA_FIN_VIDAS: 
-			estado_dinamicas.con_vidas=false;	
+		case INDICE_SALA_FIN_VIDAS:
+			estado_dinamicas.con_vidas=false;
 			++datos_juego.cambios_efectuados;
 		break;
 	}
@@ -718,7 +734,7 @@ void Controlador_juego::recoger_bonus(App_Juego::Bonus& b)
 	else if(b.es_puntos())
 	{
 		datos_juego.puntuacion+=b.acc_puntos();
-	}		
+	}
 
 	Audio::insertar_sonido(DLibA::Estructura_sonido((DLibA::Gestor_recursos_audio::obtener_sonido(App::Recursos_audio::rs_item))));
 	b.mut_borrar(true);

@@ -12,7 +12,7 @@ CC=g++
 EJECUTABLE=winter.out
 LIMPIAR=rm -r objects/*; rm $(EJECUTABLE);
 
-DIR_HOME=/home/daniel/devel/winter-fgj5/dependencies/
+DIR_HOME=./dependencies/
 DIR_LIBDAN2=$(DIR_HOME)libdansdl2
 DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)tools/
 DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)tools/objects/

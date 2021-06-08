@@ -8,8 +8,8 @@
 #include "../interfaces/representable.h"
 //#include "barra_indicadora.h"
 
-/*El representador funciona de la siguiente forma: desde el controlador 
-generamos un array de punteros a "Representables". Se le pasa el array al 
+/*El representador funciona de la siguiente forma: desde el controlador
+generamos un array de punteros a "Representables". Se le pasa el array al
 representador que primero lo ordena por profundidad y luego genera un bloque de
 transformación que pasa y procesa para cada uno de ellos.
 
@@ -91,7 +91,7 @@ class Representador
 		bool		finalizada=false;
 
 		Animacion_caida_fondo()
-			:tiempo(0.0f), pos_fondo_x(0.0f), pos_fondo_y(0.f), 
+			:tiempo(0.0f), pos_fondo_x(0.0f), pos_fondo_y(0.f),
 			angulo_rotacion(0.f), velocidad_caida(0.f), velocidad_horizontal(0.f),
 			acel_angulo(1.f)
 		{}
@@ -107,6 +107,39 @@ class Representador
 			:tiempo(0.0f)
 		{}
 	}animacion_cambio_color;
+
+	struct title_transition_out {
+
+		float time{0.f};
+		int alpha{255};
+
+		void reset() {
+
+			time=0.f;
+			alpha=255;
+		}
+
+		void tick(float _delta) {
+
+			time+=_delta;
+			if(time > 4.f) {
+
+				alpha=255 - (( (time-4.f) * 255) / 3.0f);
+			}
+
+			if(alpha < 0) {
+
+				alpha=0;
+			}
+		}
+
+		bool is_done() const {
+
+			return time > 7.0f;
+		}
+
+	} title_transition_out;
+
 };
 }
 #endif

@@ -27,12 +27,17 @@ class Recursos_graficos
 		rt_intro=7,
 		rt_game_over=8,
 		rt_the_end=9,
-		rt_credits=10
-//		rt_title_hub_round_0=10,
-//		rt_title_hub_round_1=11,
-//		rt_title_hub_round_2=12,
-//s		rt_title_hub_round_3=13
-
+		rt_credits=10,
+		rt_title_cycle_1_1=20,
+		rt_title_cycle_1_2=21,
+		rt_title_cycle_2_1=22,
+		rt_title_cycle_2_2=23,
+		rt_title_cycle_2_3=24,
+		rt_title_cycle_3=25,
+		rt_title_hub_1=26,
+		rt_title_hub_2=27,
+		rt_title_hub_3=28,
+		rt_title_hub_4=29
 	};
 };
 
